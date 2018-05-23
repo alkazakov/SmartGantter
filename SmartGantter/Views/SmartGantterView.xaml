@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="SmartGantter.Views.SmartGantterView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SmartGantter.Views"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="1160" d:DesignWidth="1225">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <telerik:RadRibbonView Grid.Row="0" ApplicationName="SmartGantter" IsApplicationButtonEnabled="True" MinimizeButtonVisibility="Visible">
+            <telerik:RadRibbonView.QuickAccessToolBar>
+                <telerik:QuickAccessToolBar IsHitTestVisible="True">
+                    <telerik:RadRibbonButton SmallImage="../Images/Information.png" telerik:RadToolTipService.ToolTipContent="Information"/>
+                </telerik:QuickAccessToolBar>
+            </telerik:RadRibbonView.QuickAccessToolBar>
+
+            <telerik:RadRibbonTab Header="Home">
+                <telerik:RadRibbonGroup Header="Clipboard">
+                    <telerik:RadRibbonSplitButton LargeImage= "Y:\REPOS\SmartGantter\SmartGantter\Images\paste.png"
+                                                  Size="Large">
+                        <telerik:ScreenTip.Title>Paste(Ctrl+V)</telerik:ScreenTip.Title>
+                        <telerik:ScreenTip.Description>Paste the contents the Clipboard.</telerik:ScreenTip.Description>
+                        <telerik:RadRibbonSplitButton.Text>Paste</telerik:RadRibbonSplitButton.Text>
+                        <telerik:RadRibbonSplitButton.DropDownContent>
+                            <telerik:RadContextMenu BorderThickness="0">
+                                <telerik:RadMenuItem Header="Paste" />
+                                <telerik:RadMenuItem Header="Paste Form" />
+                            </telerik:RadContextMenu>
+                        </telerik:RadRibbonSplitButton.DropDownContent>
+                    </telerik:RadRibbonSplitButton>
+                </telerik:RadRibbonGroup>
+            </telerik:RadRibbonTab>
+
+            <telerik:RadRibbonTab Header="View">
+            </telerik:RadRibbonTab>
+
+            <telerik:RadRibbonTab Header="Report">
+            </telerik:RadRibbonTab>
+
+            <telerik:RadRibbonTab Header="Share">
+            </telerik:RadRibbonTab>
+
+            <telerik:RadRibbonTab Header="Help">
+            </telerik:RadRibbonTab>
+
+        </telerik:RadRibbonView>
+
+    </Grid>
+</UserControl>

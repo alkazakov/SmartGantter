@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,24 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Telerik.Windows.Controls;
 
-namespace SmartGantter
+namespace SmartGantter.Views
 {
     /// <summary>
-    /// Interaktionslogik für MainWindow.xaml
+    /// Interaktionslogik für SmartGantterView.xaml
     /// </summary>
-    public partial class MainWindow : RadRibbonWindow
+    public partial class SmartGantterView : UserControl
     {
-        public MainWindow()
+        public SmartGantterView()
         {
             InitializeComponent();
-        }
-
-        private void RadRibbonWindow_Closed(object sender, System.EventArgs e)
-        {
-            Process.GetCurrentProcess().Kill();
-
+            
         }
     }
 }
