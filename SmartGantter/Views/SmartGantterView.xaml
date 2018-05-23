@@ -5,9 +5,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SmartGantter.Views"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:smartGantter="clr-namespace:SmartGantter"
+             xmlns:viewModels="clr-namespace:SmartGantter.ViewModels"
              mc:Ignorable="d" 
              d:DesignHeight="1160" d:DesignWidth="1225">
-    <Grid>
+    <UserControl.Resources>
+        <viewModels:ViewModel x:Key="ViewModel"/>
+        <Style TargetType="smartGantter:BaselineContainer">
+            <Setter Property="telerik:ZIndexManager.ZIndex" Value="100" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="smartGantter:BaselineContainer">
+                        <Border BorderBrush="Blue" BorderThickness="1" Margin="1">
+                            <Rectangle Fill="Blue" Opacity="0.2"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid DataContext="{StaticResource ViewModel}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition></RowDefinition>
@@ -23,19 +42,66 @@
 
             <telerik:RadRibbonTab Header="Home">
                 <telerik:RadRibbonGroup Header="Clipboard">
-                    <telerik:RadRibbonSplitButton LargeImage= "Y:\REPOS\SmartGantter\SmartGantter\Images\paste.png"
+                    <telerik:RadRibbonButton LargeImage= "Y:\REPOS\SmartGantter\SmartGantter\Images\paste.png"
                                                   Size="Large">
                         <telerik:ScreenTip.Title>Paste(Ctrl+V)</telerik:ScreenTip.Title>
                         <telerik:ScreenTip.Description>Paste the contents the Clipboard.</telerik:ScreenTip.Description>
-                        <telerik:RadRibbonSplitButton.Text>Paste</telerik:RadRibbonSplitButton.Text>
-                        <telerik:RadRibbonSplitButton.DropDownContent>
-                            <telerik:RadContextMenu BorderThickness="0">
-                                <telerik:RadMenuItem Header="Paste" />
-                                <telerik:RadMenuItem Header="Paste Form" />
-                            </telerik:RadContextMenu>
-                        </telerik:RadRibbonSplitButton.DropDownContent>
-                    </telerik:RadRibbonSplitButton>
+                        <telerik:RadRibbonButton.Text>Paste</telerik:RadRibbonButton.Text>
+                    </telerik:RadRibbonButton>
+                    <StackPanel>
+                        <telerik:RadRibbonButton CollapseToSmall="WhenGroupIsMedium" 
+                                                 SmallImage="Y:\REPOS\SmartGantter\SmartGantter\Images\cut.png"
+                                                 telerik:ScreenTip.Description="Cut the selection from the document and put it on the Clipboard."
+                                                 telerik:ScreenTip.Title="Cut"
+                                                 Text="Cut" />
+                        <telerik:RadRibbonButton CollapseToSmall="WhenGroupIsMedium" 
+                                                 SmallImage="Y:\REPOS\SmartGantter\SmartGantter\Images\copy.png"
+                                                 telerik:ScreenTip.Description="Copy the selection and put it on the Clipboard."
+                                                 telerik:ScreenTip.Title="Copy"
+                                                 Text="Copy" />
+                        
+                    </StackPanel>
                 </telerik:RadRibbonGroup>
+                <telerik:RadRibbonGroup Header="Format Text">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Grid.Row="0">
+                        <telerik:RadRibbonComboBox Width="135" Height="28" SelectedIndex="0" ItemsSource="{Binding Source={x:Static Fonts.SystemFontFamilies}}"/>
+                        <telerik:RadRibbonComboBox Height="28" Width="45" SelectedIndex="0">
+                            <telerik:RadRibbonComboBoxItem Content="8" />
+                            <telerik:RadRibbonComboBoxItem Content="9" />
+                            <telerik:RadRibbonComboBoxItem Content="10" />
+                            <telerik:RadRibbonComboBoxItem Content="11" />
+                            <telerik:RadRibbonComboBoxItem Content="12" />
+                            <telerik:RadRibbonComboBoxItem Content="14" />
+                            <telerik:RadRibbonComboBoxItem Content="16" />
+                            <telerik:RadRibbonComboBoxItem Content="18" />
+                        </telerik:RadRibbonComboBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Row="1">
+                            <telerik:RadRibbonButton CollapseToSmall="WhenGroupIsMedium" 
+                                                     SmallImage="Y:\REPOS\SmartGantter\SmartGantter\Images\cut.png"
+                                                     telerik:ScreenTip.Description="Cut the selection from the document and put it on the Clipboard."
+                                                     telerik:ScreenTip.Title="Cut"
+                                                     Text="Cut" />
+                            <telerik:RadRibbonButton CollapseToSmall="WhenGroupIsMedium" 
+                                                     SmallImage="Y:\REPOS\SmartGantter\SmartGantter\Images\increase.png"
+                                                     telerik:ScreenTip.Description="Increase the font size."
+                                                     telerik:ScreenTip.Title="Grow font"
+                                                     />
+                            <telerik:RadRibbonButton CollapseToSmall="WhenGroupIsMedium" 
+                                                     SmallImage="Y:\REPOS\SmartGantter\SmartGantter\Images\decrease.png"
+                                                     telerik:ScreenTip.Description="Decrease the font size."
+                                                     telerik:ScreenTip.Title="Schrink font"
+                                                     />
+                        </StackPanel>
+                    </Grid>
+                </telerik:RadRibbonGroup>
+
             </telerik:RadRibbonTab>
 
             <telerik:RadRibbonTab Header="View">
@@ -51,6 +117,60 @@
             </telerik:RadRibbonTab>
 
         </telerik:RadRibbonView>
+
+        <telerik:RadDocking Grid.Row ="1">
+            <telerik:RadDocking.DocumentHost>
+                <telerik:RadSplitContainer>
+                    <telerik:RadPaneGroup>
+                        <telerik:RadPane Header="Gantt chart">
+                            <Grid>
+                                <telerik:RadGanttView TasksSource="{Binding Tasks}" TimeLineVisualizationBehavior="{Binding TimeLineBaselineBehavior}" PixelLength="00:15:00">
+                                    <telerik:RadGanttView.TimelineContainerSelector>
+                                        <smartGantter:TimeLineBaselineContainerSelector/>
+                                    </telerik:RadGanttView.TimelineContainerSelector>
+                                    <telerik:RadGanttView.Columns>
+                                        <telerik:TreeColumnDefinition Header="Title" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding Start}" Header="Start" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding End}" Header="End" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding Duration}" Header="Duration" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding Progress}" Header="Progress" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding Priority}" Header="Priority" Width="AutoHeaderAndContent"/>
+                                        <telerik:ColumnDefinition MemberBinding="{Binding Budget}" Header="Budget" Width="AutoHeaderAndContent"/>
+                                    </telerik:RadGanttView.Columns>
+                                </telerik:RadGanttView>
+                            </Grid>
+                        </telerik:RadPane>
+
+                        <telerik:RadPane Header="Resources" CanFloat="False">
+                            <TextBlock TextWrapping="Wrap" Text="This pane cannot be dragged, because it has its property CanFloat set 'False'."/>
+                        </telerik:RadPane>
+                    </telerik:RadPaneGroup>
+                </telerik:RadSplitContainer>
+            </telerik:RadDocking.DocumentHost>
+
+            <telerik:RadSplitContainer InitialPosition="DockedLeft">
+                <telerik:RadPaneGroup>
+                    <telerik:RadPane Header="Project Explorer"/>
+                </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+
+            <telerik:RadSplitContainer InitialPosition="DockedRight">
+                <telerik:RadPaneGroup>
+                    <telerik:RadPane Header="Project"/>
+                    <telerik:RadPane Header="Task"/>
+                    <telerik:RadPane Header="Resource"/>
+                    <telerik:RadPane Header="Dependencies"/>
+                </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+
+            <telerik:RadSplitContainer InitialPosition="DockedBottom">
+                <telerik:RadPaneGroup>
+                    <telerik:RadPane Header="Output"/>
+                    <telerik:RadPane Header="Error List"/>
+                </telerik:RadPaneGroup>
+            </telerik:RadSplitContainer>
+        </telerik:RadDocking>
+
 
     </Grid>
 </UserControl>
